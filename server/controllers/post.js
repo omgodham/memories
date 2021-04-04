@@ -20,11 +20,13 @@ try {
 }
 }
 
-exports.getPost = async (req,res) => {
+exports.likePost = async (req,res) => {
    const { id } = req.params;
     try {
-        const post = await Post.findById({_id:id});
-        res.status(200).json(post);
+        const post = await Post.findById(id);
+
+        const updatedPost = await Post.findByIdAndUpdate(id,{likeCount : post.likeCount + 1},{new:true})
+        res.status(200).json(updatedPost);
     } catch (error) {
         res.status(400).json(error);
     }

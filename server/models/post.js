@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
-
+const momentTimezone = require('moment-timezone');
 const postSchema = mongoose.Schema({
 
 title:String,
 message:String,
 creator:String,
-tags:Array,
+tags:String,
 selectedFile:String,
 likeCount : {
     type:Number,
@@ -13,7 +13,7 @@ likeCount : {
 },
 createdAt:{
     type:Date,
-    default:new Date()
+    default:momentTimezone().tz('Asia/India').format() //this will give error but will give time also
 }
 });
 
